@@ -1,17 +1,18 @@
 import { useState } from 'react';
-import { Menu, X, Monitor, Cpu } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
+import { Menu, X, Cpu, LogIn } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 const navLinks = [
   { name: 'Services', href: '#services' },
   { name: 'Products', href: '#products' },
-  { name: 'Repairs', href: '#repairs' },
   { name: 'About', href: '#about' },
   { name: 'Contact', href: '#contact' },
 ];
 
 export const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const navigate = useNavigate();
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 glass">
@@ -47,10 +48,11 @@ export const Navbar = () => {
             ))}
           </div>
 
-          {/* CTA Button */}
+          {/* Login Button */}
           <div className="hidden md:block">
-            <Button variant="glow" size="lg">
-              Get Quote
+            <Button variant="glow" size="lg" onClick={() => navigate('/auth')} className="gap-2">
+              <LogIn className="w-4 h-4" />
+              Login
             </Button>
           </div>
 
@@ -77,8 +79,9 @@ export const Navbar = () => {
                   {link.name}
                 </a>
               ))}
-              <Button variant="glow" className="mt-2">
-                Get Quote
+              <Button variant="glow" className="mt-2 gap-2" onClick={() => { navigate('/auth'); setIsOpen(false); }}>
+                <LogIn className="w-4 h-4" />
+                Login
               </Button>
             </div>
           </div>
